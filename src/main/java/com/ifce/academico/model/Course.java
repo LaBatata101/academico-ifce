@@ -9,12 +9,17 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class MatrizCurricular {
+@Table(name = "tbl_course")
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToMany
-    private List<Disciplina> disciplinas;
+    private String name;
+
+    @OneToMany(mappedBy = "course")
+    private List<Class> classes;
+
+    @OneToMany(mappedBy = "course")
+    private List<Curriculum> curriculumList;
 }

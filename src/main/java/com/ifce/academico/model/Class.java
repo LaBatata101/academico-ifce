@@ -9,17 +9,17 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Curso {
+@Table(name = "tbl_class")
+public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<MatrizCurricular> matrizesCurriculares;
+    @ManyToMany
+    private List<Discipline> disciplines;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Turma> turmas;
+    @ManyToOne
+    private Course course;
 }

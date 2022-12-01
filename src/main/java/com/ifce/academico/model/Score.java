@@ -5,13 +5,20 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
 @Setter
-public class Nota {
+@Entity
+@Table(name = "tbl_score")
+public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
 
+    @ManyToOne
+    private Discipline discipline;
+
+    @ManyToOne
+    private Student student;
+
+    private double score;
 }
