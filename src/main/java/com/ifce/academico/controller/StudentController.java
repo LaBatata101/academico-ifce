@@ -15,8 +15,12 @@ import javax.validation.Valid;
 @RequestMapping("/student")
 public class StudentController {
 
-    @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    public StudentController(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/new")
