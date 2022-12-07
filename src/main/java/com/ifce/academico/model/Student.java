@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,13 +26,6 @@ public class Student {
     @Temporal(TemporalType.DATE)
     private Calendar birthday;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Discipline> disciplines;
-
-    public Student(String name, String email, String phone, Calendar birthday) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.birthday = birthday;
-    }
+    @ManyToMany(mappedBy = "students", fetch = FetchType.EAGER)
+    private List<Discipline> disciplines = new ArrayList<>();
 }

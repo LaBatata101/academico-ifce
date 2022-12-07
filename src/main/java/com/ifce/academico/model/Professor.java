@@ -29,6 +29,6 @@ public class Professor {
     @NotBlank(message = "phone number is mandatory")
     private String phone;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "professors")
     private List<Discipline> disciplines;
 }

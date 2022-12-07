@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,4 +17,13 @@ public class Discipline {
 
     private String name;
     private int workload;
+
+    @ManyToMany
+    private List<Professor> professors;
+
+    @ManyToMany(mappedBy = "disciplines")
+    private List<Curriculum> curriculumList;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Student> students;
 }
