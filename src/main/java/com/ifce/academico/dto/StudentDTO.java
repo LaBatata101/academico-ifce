@@ -24,7 +24,7 @@ public class StudentDTO {
     @NotBlank(message = "phone number is mandatory")
     private String phone;
 
-    @NotNull
+    @NotNull(message = "birthday is mandatory")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Calendar birthday;
 
