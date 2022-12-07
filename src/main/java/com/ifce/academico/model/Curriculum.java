@@ -19,6 +19,7 @@ public class Curriculum {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
+    @Column(name = "c_current_date")
     private Calendar currentDate;
 
     @ManyToMany
