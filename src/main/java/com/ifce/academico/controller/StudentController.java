@@ -4,6 +4,7 @@ import com.ifce.academico.dto.StudentDTO;
 import com.ifce.academico.dto.StudentResponseDTO;
 import com.ifce.academico.dto.StudentUpdateDTO;
 import com.ifce.academico.exception.StudentNotFoundException;
+import com.ifce.academico.mappers.StudentMapper;
 import com.ifce.academico.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,23 +16,27 @@ import javax.validation.Valid;
 @RequestMapping("/student")
 public class StudentController {
 
-    StudentRepository studentRepository;
+    final StudentRepository studentRepository;
+
+    final StudentMapper studentMapper;
 
     @Autowired
-    public StudentController(StudentRepository studentRepository) {
+    public StudentController(StudentRepository studentRepository, StudentMapper studentMapper) {
         this.studentRepository = studentRepository;
+        this.studentMapper = studentMapper;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/new")
     StudentResponseDTO newStudent(@Valid @RequestBody StudentDTO studentDTO) {
-        return new StudentResponseDTO(studentRepository.save(studentDTO.toStudent()));
+        return studentMapper.studentToStudentResponseDto(studentRepository
+                                                                 .save(studentMapper.studentDtoToStudent(studentDTO)));
     }
 
     @GetMapping("/{id}")
     StudentResponseDTO getStudent(@PathVariable Long id) {
-        return new StudentResponseDTO(studentRepository.findById(id)
-                                                       .orElseThrow(() -> new StudentNotFoundException(id)));
+        return studentRepository.findById(id).map(studentMapper::studentToStudentResponseDto)
+                                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
 //    @PatchMapping("/{id}")

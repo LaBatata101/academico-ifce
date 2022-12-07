@@ -2,7 +2,6 @@ package com.ifce.academico.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ifce.academico.model.Discipline;
-import com.ifce.academico.model.Student;
 import lombok.Getter;
 
 import javax.validation.constraints.Email;
@@ -30,8 +29,4 @@ public class StudentDTO {
     private Calendar birthday;
 
     private List<Discipline> disciplines;
-
-    public Student toStudent() {
-        return new Student(name, email, phone, birthday);
-    }
 }

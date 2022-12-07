@@ -1,14 +1,15 @@
 package com.ifce.academico.dto;
 
-import com.ifce.academico.model.Discipline;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Calendar;
-import java.util.List;
 
+@Setter
+@Getter
 public class StudentUpdateDTO {
     private String name;
     private String email;
     private String phone;
     private Calendar birthday;
-    private List<Discipline> disciplines;
 }
