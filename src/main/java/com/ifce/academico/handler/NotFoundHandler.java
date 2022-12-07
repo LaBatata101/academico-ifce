@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class StudentNotFoundHandler {
+public class NotFoundHandler {
 
     @ResponseBody
     @ExceptionHandler(StudentNotFoundException.class)
