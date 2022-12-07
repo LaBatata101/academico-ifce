@@ -5,12 +5,15 @@ import com.ifce.academico.dto.StudentResponseDTO;
 import com.ifce.academico.dto.StudentUpdateDTO;
 import com.ifce.academico.exception.StudentNotFoundException;
 import com.ifce.academico.mappers.StudentMapper;
+import com.ifce.academico.model.Student;
 import com.ifce.academico.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/student")
@@ -39,8 +42,18 @@ public class StudentController {
                                 .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
-//    @PatchMapping("/{id}")
-//    StudentResponseDTO updateStudent(@PathVariable Long id, @Valid @RequestBody StudentUpdateDTO studentUpdateDTO) {
-//
-//    }
+    @GetMapping("/")
+    List<StudentResponseDTO> getAllStudents() {
+        return studentRepository.findAll().stream().map(studentMapper::studentToStudentResponseDto)
+                                .collect(Collectors.toList());
+    }
+
+    @PatchMapping("/{id}")
+    StudentResponseDTO updateStudent(@PathVariable Long id, @Valid @RequestBody StudentUpdateDTO studentUpdateDTO) {
+        Student studentFromDb = studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
+        Student updatedStudent = studentMapper.studentUpdateDtoToStudent(studentUpdateDTO, studentFromDb);
+        updatedStudent.setId(studentFromDb.getId());
+
+        return studentMapper.studentToStudentResponseDto(studentRepository.save(updatedStudent));
+    }
 }
