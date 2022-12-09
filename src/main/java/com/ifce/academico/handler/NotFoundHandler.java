@@ -1,5 +1,6 @@
 package com.ifce.academico.handler;
 
+import com.ifce.academico.exception.CourseNotFoundException;
 import com.ifce.academico.exception.DisciplineNotFoundException;
 import com.ifce.academico.exception.StudentNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,15 @@ public class NotFoundHandler {
     @ExceptionHandler(DisciplineNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     Map<String, String> disciplineNotFoundHandler(DisciplineNotFoundException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("msg", ex.getMessage());
+        return errors;
+    }
+
+    @ResponseBody
+    @ExceptionHandler(CourseNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    Map<String, String> courseNotFoundHandler(CourseNotFoundException ex) {
         Map<String, String> errors = new HashMap<>();
         errors.put("msg", ex.getMessage());
         return errors;
