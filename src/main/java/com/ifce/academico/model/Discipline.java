@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,11 +21,14 @@ public class Discipline {
     private int workload;
 
     @ManyToMany
-    private List<Professor> professors;
+    private List<Professor> professors = new ArrayList<>();
 
     @ManyToMany(mappedBy = "disciplines")
-    private List<Curriculum> curriculumList;
+    private List<Curriculum> curriculumList = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "disciplines")
+    private List<Class> classes = new ArrayList<>();
 }
