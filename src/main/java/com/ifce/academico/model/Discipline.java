@@ -15,6 +15,7 @@ public class Discipline {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String name;
     private int workload;
 
