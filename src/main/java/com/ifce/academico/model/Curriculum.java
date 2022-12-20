@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Curriculum {
     private Calendar currentDate;
 
     @ManyToMany
-    private List<Discipline> disciplines;
+    private List<Discipline> disciplines = new ArrayList<>();
 
     @ManyToOne
     private Course course;
