@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Class {
     private String name;
 
     @ManyToMany
-    private List<Discipline> disciplines;
+    private List<Discipline> disciplines = new ArrayList<>();
 
     @ManyToOne
     private Course course;
