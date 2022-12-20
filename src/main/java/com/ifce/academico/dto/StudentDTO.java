@@ -20,7 +20,7 @@ public class StudentDTO {
     @NotBlank(message = "email is mandatory")
     private String email;
 
-    @Pattern(regexp = "\\([0-9]{2}\\)[0-9]{9}|[0-9]{9}", message = "Invalid phone number")
+    @Pattern(regexp = "\\([0-9]{2}\\) [0-9]{5}-[0-9]{4}", message = "Invalid phone number")
     @NotBlank(message = "phone number is mandatory")
     private String phone;
 
